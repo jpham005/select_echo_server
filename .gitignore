@@ -3,3 +3,5 @@ test.*
 *.o
 server
 .idea
+*.dSYM
+client

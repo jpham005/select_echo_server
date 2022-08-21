@@ -1,6 +1,6 @@
 NAME		:=	server
 
-SRCS 		:=	main.cpp Socket.cpp
+SRCS 		:=	main.cpp Socket.cpp EventHandler.cpp
 OBJS		:=	$(SRCS:.cpp=.o)
 
 INCLUDE_DIR	:=	./
@@ -11,6 +11,9 @@ LDFLAGS		:=	-Wall -Wextra -Werror -g -fsanitize=address -fsanitize=undefined
 
 .PHONY:	all
 all		:	$(NAME)
+
+client:
+	$(CXX) $(CXXFLAGS) client.cpp -o $@
 
 $(NAME)	:	$(OBJS)
 	$(CXX) $(LDFLAGS) $(OBJS) -I $(INCLUDE_DIR) -o $@

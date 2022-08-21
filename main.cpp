@@ -3,9 +3,13 @@
 #include <vector>
 
 int main() {
-  class Socket server;
 
   std::vector<class Socket> vec;
 
-  vec.push_back(server);
+  {
+    class Socket server;
+    vec.push_back(server);
+  }
+
+  std::cout << "accepted " << accept(event.ident, NULL, NULL) << std::endl;
 }

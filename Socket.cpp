@@ -40,7 +40,7 @@ Socket::Socket(const Socket &other) : _fd(other._fd) {}
 
 Socket::~Socket() {}
 
-void Socket::close_server() const noexcept {
+void Socket::close_server() const throw() {
   close(_fd);
   std::cout << "Server closed" << std::endl;
 }
