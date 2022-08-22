@@ -6,8 +6,8 @@ OBJS		:=	$(SRCS:.cpp=.o)
 INCLUDE_DIR	:=	./
 
 CXX			:=	clang++
-CXXFLAGS	:=	-Wall -Wextra -Werror -g -fsanitize=address -fsanitize=undefined
-LDFLAGS		:=	-Wall -Wextra -Werror -g -fsanitize=address -fsanitize=undefined
+CXXFLAGS	:=	-Wall -Wextra -Werror -g #-fsanitize=address -fsanitize=undefined
+LDFLAGS		:=	-Wall -Wextra -Werror -g #-fsanitize=address -fsanitize=undefined
 
 .PHONY:	all
 all		:	$(NAME)

@@ -4,6 +4,10 @@
 
 #include <arpa/inet.h>
 
+#include <sys/socket.h>
+#include <sys/select.h>
+
+#include <iostream>
 class Socket {
 private:
   int _fd;
@@ -15,7 +19,15 @@ public:
   Socket(const Socket& other);
   ~Socket();
 
+  void accept() {
+    fd_set readfds;
+    FD_SET(_fd, &readfds);
+    select(_fd + 1, &readfds, NULL, NULL, NULL);
+    std::cout << ::accept(_fd, NULL, NULL) << std::endl;
+    perror(NULL);
+  }
+
   void close_server() const throw();
 
-  int getfd() const throw { return _fd; }
+  int getfd() const throw() { return _fd; }
 };
