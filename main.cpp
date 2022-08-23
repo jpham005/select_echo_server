@@ -1,17 +1,11 @@
-#include "Socket.hpp"
-
-#include <vector>
+#include "Server.hpp"
 
 #include <iostream>
-#include <unistd.h>
+#include <vector>
+
+#include "Application.hpp"
+
 int main() {
-
-  std::vector<class Socket> vec;
-
-  {
-    class Socket server;
-    vec.push_back(server);
-  }
-
-  vec.begin()->accept();
+  Application app;
+  app.initServer();
 }

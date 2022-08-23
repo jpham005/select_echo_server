@@ -1,6 +1,6 @@
 NAME		:=	server
 
-SRCS 		:=	main.cpp Socket.cpp EventHandler.cpp
+SRCS 		:=	main.cpp Socket.cpp Server.cpp Client.cpp Application.cpp SelectManager.cpp
 OBJS		:=	$(SRCS:.cpp=.o)
 
 INCLUDE_DIR	:=	./
