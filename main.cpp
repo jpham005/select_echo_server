@@ -7,5 +7,5 @@
 
 int main() {
   Application app;
-  app.initServer();
+  app.run();
 }

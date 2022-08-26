@@ -1,19 +1,15 @@
 #include "Application.hpp"
 
-Application::server_container_type Application::_servers;
-Application::fd_set_container_type Application::_readfds;
-Application::fd_set_container_type Application::_writefds;
-Application::fd_set_container_type Application::_errorfds;
-struct timeval Application::_select_timeout = { 0, 0 };
+SelectHelper Application::_select_helper;
 
 Application::Application() {}
 
 Application::~Application() {}
 
-void Application::initServer() {
-  _servers.push_back(Server());
-}
+void Application::run() {
+  _select_helper.initServer();
 
-void Application::SelectFds() {
-
+  while (true) {
+    _select_helper.inspectFds();
+  }
 }

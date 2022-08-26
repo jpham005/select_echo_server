@@ -1,6 +1,8 @@
 #pragma once
 
-#include "SelectManager.hpp"
+#include <vector>
+
+#include "SelectHelper.hpp"
 #include "Server.hpp"
 
 class Application {
@@ -9,6 +11,8 @@ public:
 
 private:
   static server_container_type _servers;
+  static SelectHelper _select_helper;
+  static int _nfds;
 
   Application(const Application& other);
   Application& operator=(const Application& other);
@@ -19,5 +23,5 @@ public:
 
   // may recv server list from conf
   void initServer();
-  void SelectFds();
+  void run();
 };

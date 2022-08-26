@@ -10,4 +10,6 @@ public:
   explicit Client(int fd);
   Client(const Client& other);
   ~Client();
+
+  void connectClient(int server);
 };
