@@ -1,5 +1,8 @@
 #include "SelectHelper.hpp"
 
+#include <fcntl.h>
+#include <unistd.h>
+
 fd_set SelectHelper::_read_fds;
 fd_set SelectHelper::_write_fds;
 fd_set SelectHelper::_error_fds;
@@ -60,10 +63,29 @@ int SelectHelper::inspectFds() {
           continue;
         }
 
+        fcntl(accepted.getFd(), F_SETFL, O_NONBLOCK);
         std::cout << "client accepted: fd: " << accepted.getFd() << std::endl;
 
         _clients.push_back(accepted);
+        FD_CLR(i, &_read_fds);
+        FD_SET(i, &_read_fds);
+        FD_SET(_clients[0].getFd(), &_read_fds);
+
         _nfds += accepted.getFd() >= _nfds;
+      } else {
+        char  buf[1025];
+        ssize_t recved = recv(i, buf, 1024, 0);
+
+        if (recved < 0) {
+          std::cout << i << " error" << std::endl;
+          close(i);
+        } else if (recved == 0) {
+          std::cout << "connection closed: fd: " << i << std::endl;
+          close(i);
+        } else {
+          buf[recved] = 0;
+          std::cout << "recved message: " << buf << std::endl;
+        }
       }
     }
   }
